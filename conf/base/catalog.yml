@@ -45,16 +45,16 @@ crowdtruth_jobs:
 
 # Selected annotations & workers
 
-prolific_workers_selected:
+prolific_workers_final:
   type: pandas.CSVDataset
-  filepath: data/03_results/prolific_workers_selected_new.csv
+  filepath: data/03_results/prolific_workers_final.csv
   save_args:
     index: False
     encoding: "utf-8"
 
-prolific_annotations_selected:
+prolific_annotations_final:
   type: pandas.CSVDataset
-  filepath: data/03_results/prolific_annotations_selected_new.csv
+  filepath: data/03_results/prolific_annotations_final.csv
   save_args:
     index: False
     encoding: "utf-8"

@@ -13,6 +13,7 @@ jupyter = "^1.1.1"
 kedro-datasets = "^5.0.0"
 crowdtruth = "^2.1"
 matplotlib = "^3.10.3"
+plotly = "^6.1.2"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.10.0"

@@ -15,7 +15,7 @@ def create_pipeline(**kwargs) -> Pipeline:
                     "df_prolific_annotations": "prolific_annotations_all",
                     "df_prolific_workers": "prolific_workers_all",
                 },
-                outputs=["prolific_annotations_selected", "prolific_workers_selected"],
+                outputs=["prolific_annotations_final", "prolific_workers_final"],
             ),
         ]
     )
