@@ -1,0 +1,39 @@
+
+# Input data
+
+prolific_input_file:
+  type: pandas.CSVDataset
+  filepath: data/01_raw/prolific.csv
+
+# Intermediate data
+
+preprocessed_data:
+  type: pickle.PickleDataset
+  filepath: data/02_intermediate/preprocessed_data.pickle
+
+config:
+  type: pickle.PickleDataset
+  filepath: data/02_intermediate/config.pickle
+
+
+# Results
+
+units:
+  type: pickle.PickleDataset
+  filepath: data/03_results/pickle/units.pickle
+
+workers:
+  type: pickle.PickleDataset
+  filepath: data/03_results/pickle/workers.pickle
+
+annotations:
+  type: pickle.PickleDataset
+  filepath: data/03_results/pickle/annotations.pickle
+
+judgments:
+  type: pickle.PickleDataset
+  filepath: data/03_results/pickle/judgments.pickle
+
+jobs:
+  type: pickle.PickleDataset
+  filepath: data/03_results/pickle/jobs.pickle

@@ -1,0 +1,4 @@
+prolific_input_filepath: data/01_raw/prolific.csv
+
+n_classes: 3
+  
