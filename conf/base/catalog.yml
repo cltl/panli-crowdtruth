@@ -1,39 +1,60 @@
 
 # Input data
 
-prolific_input_file:
+prolific_annotations_all:
   type: pandas.CSVDataset
-  filepath: data/01_raw/prolific.csv
+  filepath: data/01_raw/prolific_annotations_all.csv
+
+prolific_workers_all:
+  type: pandas.CSVDataset
+  filepath: data/01_raw/prolific_workers_all.csv
 
 # Intermediate data
 
-preprocessed_data:
+preprocessed_annotations:
   type: pickle.PickleDataset
-  filepath: data/02_intermediate/preprocessed_data.pickle
+  filepath: data/02_intermediate/preprocessed_annotations.pickle
 
 config:
   type: pickle.PickleDataset
   filepath: data/02_intermediate/config.pickle
 
 
-# Results
+# CrowdTruth results
 
-units:
+crowdtruth_units:
   type: pickle.PickleDataset
-  filepath: data/03_results/pickle/units.pickle
+  filepath: data/03_results/crowdtruth/units.pickle
 
-workers:
+crowdtruth_workers:
   type: pickle.PickleDataset
-  filepath: data/03_results/pickle/workers.pickle
+  filepath: data/03_results/crowdtruth/workers.pickle
 
-annotations:
+crowdtruth_annotations:
   type: pickle.PickleDataset
-  filepath: data/03_results/pickle/annotations.pickle
+  filepath: data/03_results/crowdtruth/annotations.pickle
 
-judgments:
+crowdtruth_judgments:
   type: pickle.PickleDataset
-  filepath: data/03_results/pickle/judgments.pickle
+  filepath: data/03_results/crowdtruth/judgments.pickle
 
-jobs:
+crowdtruth_jobs:
   type: pickle.PickleDataset
-  filepath: data/03_results/pickle/jobs.pickle
+  filepath: data/03_results/crowdtruth/jobs.pickle
+
+
+# Selected annotations & workers
+
+prolific_workers_selected:
+  type: pandas.CSVDataset
+  filepath: data/03_results/prolific_workers_selected_new.csv
+  save_args:
+    index: False
+    encoding: "utf-8"
+
+prolific_annotations_selected:
+  type: pandas.CSVDataset
+  filepath: data/03_results/prolific_annotations_selected_new.csv
+  save_args:
+    index: False
+    encoding: "utf-8"

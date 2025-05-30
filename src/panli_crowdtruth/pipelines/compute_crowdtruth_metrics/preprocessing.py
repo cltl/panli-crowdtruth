@@ -63,7 +63,7 @@ def prepare_crowdtruth_judgments(
         input_filepath: Path to input data.
         n_classes: Number of classes (3 or 4) in PANLI dataset.
     """
-    # Determine config class
+    # Create config class
     if n_classes == 3:
         config_class = ConfigThreeLabels()
     elif n_classes == 4:
