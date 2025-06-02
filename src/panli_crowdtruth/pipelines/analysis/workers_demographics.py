@@ -1,7 +1,10 @@
+from typing import Dict
+
 import pandas as pd
 import plotly.express as px
+from plotly.graph_objects import Figure
 
-PLOTLY_COLORS = px.colors.qualitative.T10
+from panli_crowdtruth.pipelines.analysis.config_plotly import DIR_IMAGES, PLOTLY_COLORS
 
 
 def replace_by_other(row, column_name="fluent_language", threshold=4):
@@ -13,7 +16,7 @@ def replace_by_other(row, column_name="fluent_language", threshold=4):
 
 
 def plot_employment_status(
-    df_export: pd.DataFrame,
+    df_prolific_workers: pd.DataFrame,
 ) -> px.pie:
     """
     Generates a pie chart visualizing the distribution of employment status in the
@@ -22,8 +25,9 @@ def plot_employment_status(
     and creates a Plotly pie chart showing the proportion of each status.
 
     Args:
-        df_export (pd.DataFrame): DataFrame containing an "Employment Status" column
+        df_prolific_workers: DataFrame containing an "Employment Status" column
             with employment status labels.
+
     Returns:
         px.pie: A Plotly pie chart figure object representing the employment
             status distribution.
@@ -43,7 +47,7 @@ def plot_employment_status(
     }
 
     # Make a copy to avoid modifying the original DataFrame
-    df_employment = df_export.copy()
+    df_employment = df_prolific_workers.copy()
     # Replace employment status values using the mapping above
     df_employment["Employment Status"] = df_employment["Employment Status"].replace(
         to_replace
@@ -63,14 +67,22 @@ def plot_employment_status(
 
 
 def plot_nationalities(
-    df_export: pd.DataFrame,
+    df_prolific_workers: pd.DataFrame,
 ) -> px.pie:
     """
-    Generates a pie chart showing the distribution of participants' nationalities/
+    Generates a pie chart showing the distribution of participants' nationalities.
+    Nationalities with fewer than 20 workers are grouped into an "Other" category.
+
+    Args:
+        df_prolific_workers: DataFrame containing worker information
+
+    Returns:
+        px.pie: A Plotly pie chart figure object representing the distribution of
+            participants' nationalities.
     """
     # Group by 'Nationality' and count unique workers per nationality
     df_nationalities = (
-        df_export.groupby("Nationality")["worker_id"]
+        df_prolific_workers.groupby("Nationality")["worker_id"]
         .nunique()
         .to_frame("n_workers")
         .reset_index()
@@ -96,19 +108,19 @@ def plot_nationalities(
     return fig
 
 
-def plot_age(df_export: pd.DataFrame) -> px.histogram:
+def plot_age(df_prolific_workers: pd.DataFrame) -> px.histogram:
     """
     Generates a histogram of the ages of participants, excluding outliers (ages >= 100).
 
     Args:
-        df_export: input dataframe containing worker information,
+        df_prolific_workers: input dataframe containing worker information,
             including an 'age' column
 
     Returns:
-        Plotly histogram object showing the distribution of ages.
+        px.histogram: Plotly histogram object showing the distribution of ages.
     """
     # Filter out outlier ages (age >= 100)
-    df_age = df_export[df_export.age < 100]
+    df_age = df_prolific_workers[df_prolific_workers.age < 100]
 
     # Create a histogram of ages with a marginal box plot
     fig = px.histogram(
@@ -127,26 +139,27 @@ def plot_age(df_export: pd.DataFrame) -> px.histogram:
     return fig
 
 
-def plot_fluent_languages(df_export: pd.DataFrame) -> px.bar:
+def plot_fluent_languages(df_prolific_workers: pd.DataFrame) -> px.bar:
     """
     Generates a bar plot showing the number of unique workers per fluent language,
     excluding English, and groups languages with fewer than a specified threshold
     of workers into an "Other" category.
 
     Args:
-        df_export: input dataframe containing worker information, including a
+        df_prolific_workers: input dataframe containing worker information, including a
             column 'Fluent languages'
 
     Returns:
-        Plotly bar plot object showing the number of workers per fluent language.
+        px.bar: Plotly bar plot object showing the number of workers per fluent
+            language.
     """
 
     # Split the 'Fluent languages' column into lists (if not already)
-    df_export["Fluent languages"] = df_export["Fluent languages"].apply(
-        lambda x: x.split(", ") if isinstance(x, str) else x
-    )
+    df_prolific_workers["Fluent languages"] = df_prolific_workers[
+        "Fluent languages"
+    ].apply(lambda x: x.split(", ") if isinstance(x, str) else x)
     # Explode the lists so each language gets its own row
-    df_fluent = df_export.explode("Fluent languages").rename(
+    df_fluent = df_prolific_workers.explode("Fluent languages").rename(
         columns={"Fluent languages": "fluent_language"}
     )
     # Count unique workers per language
@@ -190,5 +203,33 @@ def plot_fluent_languages(df_export: pd.DataFrame) -> px.bar:
     return fig
 
 
-def get_demographics(df_workers: pd.DataFrame):
-    return None
+def analyse_demographics(df_prolific_workers: pd.DataFrame) -> Dict[str, Figure]:
+    """
+    Generates demographic visualizations for the provided DataFrame of Prolific workers.
+
+    Args:
+        df_prolific_workers: DataFrame containing worker information.
+
+    Returns:
+        Dict[str, px.Figure]: A dictionary containing Plotly figures for various
+            demographic visualizations, including employment status, nationalities,
+            age distribution, and fluent languages.
+    """
+
+    # Generate demographic visualizations
+    figs_demographics = {
+        "fig_employment_status": plot_employment_status(df_prolific_workers),
+        "fig_nationalities": plot_nationalities(df_prolific_workers),
+        "fig_age": plot_age(df_prolific_workers),
+        "fig_fluent_languages": plot_fluent_languages(df_prolific_workers),
+    }
+
+    # Save figures as images
+    for key, fig in figs_demographics.items():
+        fig.write_image(
+            f"{DIR_IMAGES}/workers_demographics_{key}.png",
+            width=800,
+            height=600,
+        )
+
+    return figs_demographics

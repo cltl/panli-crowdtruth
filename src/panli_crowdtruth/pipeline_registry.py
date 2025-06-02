@@ -5,6 +5,7 @@ from typing import Dict
 from kedro.framework.project import find_pipelines
 from kedro.pipeline import Pipeline
 
+from .pipelines.analysis import pipeline as analysis
 from .pipelines.compute_crowdtruth_metrics import pipeline as compute_crowdtruth_metrics
 from .pipelines.selection import pipeline as selection
 
@@ -31,12 +32,14 @@ def register_pipelines() -> Dict[str, Pipeline]:
     # Create individual pipelines
     compute_crowdtruth_metrics_pipeline = compute_crowdtruth_metrics.create_pipeline()
     selection_pipeline = selection.create_pipeline()
+    analysis_pipeline = analysis.create_pipeline()
 
     # Define the full pipeline by combining the individual pipelines
     full_pipeline = Pipeline(
         nodes=[
             compute_crowdtruth_metrics_pipeline,
             selection_pipeline,
+            analysis_pipeline,
         ]
     )
 
@@ -47,6 +50,7 @@ def register_pipelines() -> Dict[str, Pipeline]:
             "auto": sum(pipelines.values()),
             "compute_crowdtruth_metrics": compute_crowdtruth_metrics_pipeline,
             "selection": selection_pipeline,
+            "analysis": analysis_pipeline,
         }
     )
 
