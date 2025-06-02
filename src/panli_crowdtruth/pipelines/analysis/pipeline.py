@@ -1,5 +1,6 @@
 from kedro.pipeline import Pipeline, node, pipeline
 
+from .annotations import analyse_annotations
 from .workers_demographics import analyse_demographics
 from .workers_performance import analyse_performance
 
@@ -23,6 +24,15 @@ def create_pipeline(**kwargs) -> Pipeline:
                     "df_crowdtruth_units": "crowdtruth_units",
                 },
                 outputs="images_performance",
+            ),
+            node(
+                name="analyse_annotations",
+                func=analyse_annotations,
+                inputs={
+                    "df_crowdtruth_judgments": "crowdtruth_judgments",
+                    "df_crowdtruth_units": "crowdtruth_units",
+                },
+                outputs="images_annotations",
             ),
         ]
     )
