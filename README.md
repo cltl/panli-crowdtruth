@@ -69,6 +69,18 @@ Replace `<pipeline_name>` or `<node_name>` with the desired pipeline. Available 
 
  For more options, see the [Kedro documentation](https://docs.kedro.org/en/stable/04_user_guide/03_cli.html).
 
+## Using Kedro with JupyterLab
+
+To interactively explore data and run Kedro pipelines in notebooks, you can use Kedro's JupyterLab integration.
+
+Start JupyterLab with Kedro support:
+
+    ```bash
+    kedro jupyter lab
+    ```
+
+This will launch JupyterLab with the Kedro context preloaded, allowing you to access Kedro datasets, pipelines, and configuration directly within your notebooks. For more details, see the [Kedro Jupyter documentation](https://docs.kedro.org/en/stable/tools/jupyter.html).
+
 ## Citation
 
 If you use this repository, please cite the original PANLI dataset and CrowdTruth papers.
