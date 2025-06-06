@@ -69,7 +69,7 @@ Replace `<pipeline_name>` or `<node_name>` with the desired pipeline. Available 
 - `selection`: Filters and selects relevant data subsets for further analysis.
 - `analysis`: Performs in-depth analysis and generates visualizations based on the processed data.
 
- For more options, see the [Kedro documentation](https://docs.kedro.org/en/stable/04_user_guide/03_cli.html).
+ For more options, see the [Kedro documentation](https://docs.kedro.org/en/stable/index.html).
 
 ## Using Kedro with JupyterLab
 
@@ -83,7 +83,7 @@ kedro jupyter lab
 ```
 
 
-This will launch JupyterLab with the Kedro context preloaded, allowing you to access Kedro datasets, pipelines, and configuration directly within your notebooks. For more details, see the [Kedro Jupyter documentation](https://docs.kedro.org/en/stable/tools/jupyter.html).
+This will launch JupyterLab with the Kedro context preloaded, allowing you to access Kedro datasets, pipelines, and configuration directly within your notebooks.
 
 ## Citation
 
