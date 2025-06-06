@@ -1,99 +1,100 @@
 # A CrowdTruth analysis of the PANLI dataset
 
+> A reproducible analysis pipeline for measuring annotation quality and ambiguity in the PANLI dataset, using the CrowdTruth framework and Kedro.
 
 ## Overview
 
-This repository contains an analysis of the PANLI dataset using the CrowdTruth framework. The goal is to evaluate annotation quality and gather insights from crowdsourced data. The anlysis and results are reported in detail in the following thesis:
+This repository analyzes the **PANLI** dataset using the **CrowdTruth** framework, a methodology for evaluating crowdsourced annotations by embracing disagreement and ambiguity. The goal is to assess annotation quality, reveal perspective variation, and support deeper insight into natural language inference (NLI).
+
+The full analysis is described in:
 
 > van Son, C. M. (2024). *Representative Resources for Perspective-Aware Natural Language Inference* (PhD thesis, Vrije Universiteit Amsterdam). [https://doi.org/10.5463/thesis.644](https://doi.org/10.5463/thesis.644)
 
-See also the following related projects:
-- [panli](https://github.com/cltl/panli) — The dataset used in this project.
-- [panli-models](https://github.com/cltl/panli-models) — An evaluation of Transformer models on PANLI.
+## Background
 
-## What is PANLI?
+### What is PANLI?
 
-PANLI is a dataset designed for evaluating natural language inference (NLI) tasks. It includes a variety of sentence pairs annotated for entailment, contradiction, or neutrality.
+**[PANLI](https://github.com/cltl/panli)** is a benchmark dataset for **perspective-aware natural language inference (NLI)**, constructed from real-world vaccination discourse. Each sentence pair is annotated for entailment, contradiction, or neutrality, with special attention to multiple perspectives.
 
-## What is CrowdTruth?
+### What is CrowdTruth?
 
-CrowdTruth is a methodology and set of tools for measuring the quality of crowdsourced annotations by capturing inter-annotator disagreement, providing a more nuanced understanding of ambiguous data. See also the [CrowdTruth repository](https://github.com/CrowdTruth/CrowdTruth-core).
+**[CrowdTruth](https://github.com/CrowdTruth/CrowdTruth-core)** is a methodology that leverages inter-annotator disagreement to measure annotation quality and ambiguity—especially useful in subjective or complex tasks like NLI.
 
-## Kedro Pipeline
 
-This project is structured as a [Kedro](https://kedro.org/) pipeline, enabling reproducible, modular, and scalable data workflows. Kedro manages data processing, experiment tracking, and configuration, making it easier to organize and automate the analysis steps for the PANLI dataset. All data transformations and CrowdTruth metric computations are implemented as Kedro nodes and pipelines.
 
-## Repository Structure
+## Project Structure
 
-- `conf/` - Kedro configuration files for managing project settings and parameters.
-- `data/` - Contains the PANLI dataset, preprocessed files, and results such as visualizations.
-- `notebooks/` - Jupyter notebooks for data exploration and analysis.
-- `src/` - Source code for running CrowdTruth metrics and processing data.
+This project is implemented as a [Kedro](https://kedro.org/)  pipeline to ensure modular, scalable, and reproducible workflows.
+
+```bash
+📁 conf/        # Configuration files (Kedro settings and parameters)
+📁 data/        # Raw and intermediate data (PANLI, results, plots)
+📁 notebooks/   # Jupyter notebooks for exploration and reporting
+📁 src/         # Source code: data processing, CrowdTruth computation
+```
+
 
 ## Getting Started
 
-1. Clone the repository:
+1. Clone the repository
     ```bash
     git clone https://github.com/yourusername/panli-crowdtruth.git
+    cd panli-crowdtruth
     ```
-2. Install [Poetry](https://python-poetry.org/) for dependency management:
+2. Install [Poetry](https://python-poetry.org/) (if needed)
     ```bash
     curl -sSL https://install.python-poetry.org | python3 -
     ```
     Or follow the [official installation guide](https://python-poetry.org/docs/#installation).
 
-3. Install the project dependencies:
+3. Install dependencies
     ```bash
     poetry install
     ```
 
-4. Activate the virtual environment:
+4. Activate the virtual environment
     ```bash
     poetry shell
     ```
 
 ## Running the Kedro Pipelines
 
-You can execute the entire data analysis workflow or run individual pipeline segments using Kedro's command-line interface.
+Once the environment is activated, you can use Kedro to run the pipelines:
 
-Run these commands after activating the Poetry shell, or by prefixing with `poetry run`.
 
-- **To run the full pipeline:**
+- **Run the full analysis pipeline:**
     ```bash
     kedro run
     ```
 
-- **To run a specific pipeline or node:**
+- **Run a specific pipeline or node:**
     ```bash
     kedro run --pipelines=<pipeline_name>
     kedro run --nodes=<node_name>
     ```
 
-Replace `<pipeline_name>` or `<node_name>` with the desired pipeline. Available pipelines, as defined in `pipeline_registry.py`, include:
+Available pipelines include:
 
 - `compute_crowdtruth_metrics`: Computes CrowdTruth metrics to evaluate annotation quality and inter-annotator agreement.
-- `selection`: Filters and selects relevant data subsets for further analysis.
+- `selection`: Filters and selects relevant subsets of PANLI.
 - `analysis`: Performs in-depth analysis and generates visualizations based on the processed data.
 
- For more options, see the [Kedro documentation](https://docs.kedro.org/en/stable/index.html).
+See `src/panli_crowdtruth/pipeline_registry.py` for the full list.
 
-## Using Kedro with JupyterLab
 
-To interactively explore data and run Kedro pipelines in notebooks, you can use Kedro's JupyterLab integration.
+##  Working in JupyterLab
 
-Run the following command after activating the Poetry shell, or by prefixing with `poetry run`:
-
+For interactive exploration:
 
 ```bash
 kedro jupyter lab
 ```
 
-
-This will launch JupyterLab with the Kedro context preloaded, allowing you to access Kedro datasets, pipelines, and configuration directly within your notebooks.
+This launches JupyterLab with Kedro's context preloaded, giving you direct access to datasets, pipelines, and configuration within the notebook interface.
 
 ## Citation
 
-If you use this repository, please consider citing:
+If you use this repository, please cite the following works:
 
 * van Son, C. M. (2024). *Representative Resources for Perspective-Aware Natural Language Inference* (PhD thesis, Vrije Universiteit Amsterdam). [https://doi.org/10.5463/thesis.644](https://doi.org/10.5463/thesis.644)
 
@@ -130,3 +131,10 @@ If you use this repository, please consider citing:
     ```
     </details>
 
+
+## Related Projects
+
+
+- [panli](https://github.com/cltl/panli) — The PANLI dataset
+- [panli-models](https://github.com/cltl/panli-models) — Model evaluation on PANLI
+- [crowdtruth](https://github.com/CrowdTruth/CrowdTruth-core) — CrowdTruth methodology and metrics
