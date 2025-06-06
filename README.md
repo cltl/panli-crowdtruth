@@ -3,7 +3,13 @@
 
 ## Overview
 
-This repository contains an analysis of the PANLI dataset using the CrowdTruth framework. The goal is to evaluate annotation quality and gather insights from crowdsourced data.
+This repository contains an analysis of the PANLI dataset using the CrowdTruth framework. The goal is to evaluate annotation quality and gather insights from crowdsourced data. The anlysis and results are reported in detail in the following thesis:
+
+> van Son, C. M. (2024). *Representative Resources for Perspective-Aware Natural Language Inference* (PhD thesis, Vrije Universiteit Amsterdam). [https://doi.org/10.5463/thesis.644](https://doi.org/10.5463/thesis.644)
+
+See also the following related projects:
+- [panli](https://github.com/cltl/panli) — The dataset used in this project.
+- [panli-models](https://github.com/cltl/panli-models) — An evaluation of Transformer models on PANLI.
 
 ## What is PANLI?
 
@@ -124,6 +130,3 @@ If you use this repository, please consider citing:
     ```
     </details>
 
-## License
-
-This project is licensed under the Apache License 2.0.
