@@ -89,7 +89,7 @@ This will launch JupyterLab with the Kedro context preloaded, allowing you to ac
 
 If you use this repository, please consider citing:
 
-* van Son, C. M. (2024). *Representative Resources for Perspective-Aware Natural Language Inference* (PhD thesis, Vrije Universiteit Amsterdam). https://doi.org/10.5463/thesis.644
+* van Son, C. M. (2024). *Representative Resources for Perspective-Aware Natural Language Inference* (PhD thesis, Vrije Universiteit Amsterdam). [https://doi.org/10.5463/thesis.644](https://doi.org/10.5463/thesis.644)
 
     <details>
     <summary>BibTeX</summary>
