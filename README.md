@@ -11,7 +11,7 @@ PANLI is a dataset designed for evaluating natural language inference (NLI) task
 
 ## What is CrowdTruth?
 
-CrowdTruth is a methodology and set of tools for measuring the quality of crowdsourced annotations by capturing inter-annotator disagreement, providing a more nuanced understanding of ambiguous data.
+CrowdTruth is a methodology and set of tools for measuring the quality of crowdsourced annotations by capturing inter-annotator disagreement, providing a more nuanced understanding of ambiguous data. See also the [CrowdTruth repository](https://github.com/CrowdTruth/CrowdTruth-core).
 
 ## Kedro Pipeline
 
@@ -75,25 +75,54 @@ Replace `<pipeline_name>` or `<node_name>` with the desired pipeline. Available 
 
 To interactively explore data and run Kedro pipelines in notebooks, you can use Kedro's JupyterLab integration.
 
-Run these commands after activating the Poetry shell, or by prefixing with `poetry run`:
+Run the following command after activating the Poetry shell, or by prefixing with `poetry run`:
 
-- **If inside the Poetry shell:**
-    ```bash
-    kedro jupyter lab
-    ```
 
-- **Or, without activating the shell:**
-    ```bash
-    poetry run kedro jupyter lab
-    ```
-
+```bash
+kedro jupyter lab
+```
 
 
 This will launch JupyterLab with the Kedro context preloaded, allowing you to access Kedro datasets, pipelines, and configuration directly within your notebooks. For more details, see the [Kedro Jupyter documentation](https://docs.kedro.org/en/stable/tools/jupyter.html).
 
 ## Citation
 
-If you use this repository, please cite the original PANLI dataset and CrowdTruth papers.
+If you use this repository, please consider citing:
+
+* van Son, C. M. (2024). *Representative Resources for Perspective-Aware Natural Language Inference* (PhD thesis, Vrije Universiteit Amsterdam). https://doi.org/10.5463/thesis.644
+
+    <details>
+    <summary>BibTeX</summary>
+    ```bibtex
+    @phdthesis{ba18bc83a2be4b29805c6b91aaa9a152,
+        title = "Representative Resources for Perspective-Aware Natural Language Inference",
+        author = "{van Son}, {Chantal Michelle}",
+        year = "2024",
+        month = nov,
+        day = "1",
+        doi = "10.5463/thesis.644",
+        language = "English",
+        type = "PhD-Thesis - Research and graduation internal",
+        school = "Vrije Universiteit Amsterdam",
+    }
+    ```
+    </details>
+
+
+* Dumitrache, A., Inel, O., Aroyo, L., Timmermans, B., & Welty, C. (2018). CrowdTruth 2.0: Quality Metrics for Crowdsourcing with Disagreement. *arXiv preprint arXiv:1808.06080*. https://arxiv.org/abs/1808.06080
+
+    <details>
+    <summary>BibTeX</summary>
+
+    ```bibtex
+    @article{CrowdTruth2,
+        author    = {Anca Dumitrache and Oana Inel and Lora Aroyo and Benjamin Timmermans and Chris Welty},
+        title     = {CrowdTruth 2.0: Quality Metrics for Crowdsourcing with Disagreement},
+        year      = {2018},
+        url       = {https://arxiv.org/abs/1808.06080},
+    }
+    ```
+    </details>
 
 ## License
 
