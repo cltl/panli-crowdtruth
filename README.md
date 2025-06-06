@@ -50,6 +50,8 @@ This project is structured as a [Kedro](https://kedro.org/) pipeline, enabling r
 
 You can execute the entire data analysis workflow or run individual pipeline segments using Kedro's command-line interface.
 
+Run these commands after activating the Poetry shell, or by prefixing with `poetry run`.
+
 - **To run the full pipeline:**
     ```bash
     kedro run
@@ -58,14 +60,14 @@ You can execute the entire data analysis workflow or run individual pipeline seg
 - **To run a specific pipeline or node:**
     ```bash
     kedro run --pipelines=<pipeline_name>
-    kedro run --nodes= <node_name>
+    kedro run --nodes=<node_name>
     ```
 
 Replace `<pipeline_name>` or `<node_name>` with the desired pipeline. Available pipelines, as defined in `pipeline_registry.py`, include:
 
-- `compute_crowdtruth_metrics`
-- `selection`
-- `analysis`
+- `compute_crowdtruth_metrics`: Computes CrowdTruth metrics to evaluate annotation quality and inter-annotator agreement.
+- `selection`: Filters and selects relevant data subsets for further analysis.
+- `analysis`: Performs in-depth analysis and generates visualizations based on the processed data.
 
  For more options, see the [Kedro documentation](https://docs.kedro.org/en/stable/04_user_guide/03_cli.html).
 
@@ -73,11 +75,19 @@ Replace `<pipeline_name>` or `<node_name>` with the desired pipeline. Available 
 
 To interactively explore data and run Kedro pipelines in notebooks, you can use Kedro's JupyterLab integration.
 
-Start JupyterLab with Kedro support:
+Run these commands after activating the Poetry shell, or by prefixing with `poetry run`:
 
+- **If inside the Poetry shell:**
     ```bash
     kedro jupyter lab
     ```
+
+- **Or, without activating the shell:**
+    ```bash
+    poetry run kedro jupyter lab
+    ```
+
+
 
 This will launch JupyterLab with the Kedro context preloaded, allowing you to access Kedro datasets, pipelines, and configuration directly within your notebooks. For more details, see the [Kedro Jupyter documentation](https://docs.kedro.org/en/stable/tools/jupyter.html).
 
